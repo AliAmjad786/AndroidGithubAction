@@ -30,3 +30,18 @@ jobs:
         with:
           name: Android.apk
           path: app/build/outputs/apk/debug/app-debug.apk
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+       - name: Checkout
+         uses: actions/checkout@v4
+
+       - name: Run Lint
+         run: ./gradlew lintDebug
+
+       - name: Upload html test report
+         uses: actions/upload-artifact@v4
+         with:
+           name: html.index
+           path: app/build/reports/lint-results-debug.html
